@@ -26,12 +26,12 @@ public class Product {
     @Column(nullable = false)
     private String category;
 
-    @NotBlank(message = "O valor do produto não pode ser nulo.")
+    @NotNull(message = "O valor do produto não pode ser nulo.")
     @Min(value = 0, message = "O valor não pode ser negativo.")
     @Column(nullable = false)
     private Double price;
 
-    @NotBlank(message = "A quantidade é obrigatória")
+    @NotNull(message = "A quantidade é obrigatória")
     @Min(value = 0, message = "A quantidade de produtos não pode ser negativa")
     @Column(nullable = false)
     private Integer quantity;
