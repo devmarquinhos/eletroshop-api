@@ -3,6 +3,8 @@ package com.devmarquinhos.eletroshop_api.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 @Data
@@ -18,30 +20,33 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @NotBlank(message = "Descrição do produto não pode estar nula.")
+    @NotBlank(message = "Descrição do produto não pode estar vazia.")
     @Column(nullable = false)
     private String description;
 
-    @NotBlank(message = "Categoria do produto não pode estar nula.")
+    @NotBlank(message = "Categoria do produto não pode estar vazia.")
     @Column(nullable = false)
     private String category;
 
     @NotNull(message = "O valor do produto não pode ser nulo.")
-    @Min(value = 0, message = "O valor não pode ser negativo.")
+    @PositiveOrZero(message = "O valor não pode ser negativo.")
     @Column(nullable = false)
     private Double price;
 
-    @NotNull(message = "A quantidade é obrigatória")
-    @Min(value = 0, message = "A quantidade de produtos não pode ser negativa")
+    @NotNull(message = "A quantidade é obrigatória.")
+    @Min(
+        value = 0,
+        message = "A quantidade de produtos não pode ser negativa."
+    )
     @Column(nullable = false)
     private Integer quantity;
 
+    @Column(nullable = false)
     private Boolean isAvailable;
 
     @PrePersist
     @PreUpdate
-    public void calculateStatus(){
+    public void calculateStatus() {
         this.isAvailable = this.quantity != null && this.quantity > 0;
     }
-
 }
