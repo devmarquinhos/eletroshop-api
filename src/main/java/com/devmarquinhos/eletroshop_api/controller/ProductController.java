@@ -2,6 +2,8 @@ package com.devmarquinhos.eletroshop_api.controller;
 
 import com.devmarquinhos.eletroshop_api.model.Product;
 import com.devmarquinhos.eletroshop_api.service.ProductService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
